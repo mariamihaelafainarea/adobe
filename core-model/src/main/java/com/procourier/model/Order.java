@@ -8,6 +8,7 @@ import java.util.Objects;
 //mergem pe principiul ca toate obiectele sunt value object =>
 //o data definite raman asa !
 public final class Order {
+    private Long id;
     private Seller seller;
     private Buyer buyer;
     private Product product;
@@ -15,7 +16,8 @@ public final class Order {
     private Instant submittedDate;
     private Map<Product,Integer> orderLines = new HashMap<>();
 
-    public Order(Seller seller, Buyer buyer, Product product, Courier courier, Instant submittedDate, Map<Product, Integer> orderLines) {
+    public Order(Long id,Seller seller, Buyer buyer, Product product, Courier courier, Instant submittedDate, Map<Product, Integer> orderLines) {
+        this.id = Objects.requireNonNull(id);
         this.seller = Objects.requireNonNull(seller);
         this.buyer = Objects.requireNonNull(buyer);
         this.product = Objects.requireNonNull(product);
@@ -24,7 +26,35 @@ public final class Order {
         this.orderLines = Collections.unmodifiableMap(orderLines);
     }
 
-    public Order(Seller seller, Buyer buyer, Product product, Courier courier, Map<Product, Integer> orderLines) {
-        this(seller,buyer,product,courier,Instant.now(),orderLines);
+    public Order(Long id,Seller seller, Buyer buyer, Product product, Courier courier, Map<Product, Integer> orderLines) {
+        this(id,seller,buyer,product,courier,Instant.now(),orderLines);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Courier getCourier() {
+        return courier;
+    }
+
+    public Instant getSubmittedDate() {
+        return submittedDate;
+    }
+
+    public Map<Product, Integer> getOrderLines() {
+        return orderLines;
     }
 }
